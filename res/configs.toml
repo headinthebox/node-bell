@@ -18,7 +18,6 @@ namePrefix = "bell."
 
 # ================================ Listener ===================================
 [listener]
-host = "0.0.0.0"
 port = 2024
 
 [listener.patterns]
