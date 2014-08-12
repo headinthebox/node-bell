@@ -2,6 +2,7 @@
   "name": "bell",
   "version": "0.0.1",
   "dependencies": {
+    "bufferpack": "~0.0.6",
     "co": "~3.1.0",
     "commander": "2.3.0",
     "fivebeans": "~1.1.1",
