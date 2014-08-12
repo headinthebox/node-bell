@@ -16,6 +16,7 @@ var co = require('co')
   , toml = require('toml')
   , configs = require('./lib/configs')
   , listener = require('./lib/listener')
+  , analyzer = require('./lib/analyzer')
   , util = require('./lib/util');
 
 var log = util.log;
@@ -55,7 +56,7 @@ co(function *(){
   if (!name) program.help();
 
   var service = {
-    listener: listener
+    listener: listener, analyzer: analyzer
   }[name];
 
   if (!service) program.help();
