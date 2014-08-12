@@ -59,5 +59,5 @@ co(function *(){
   }[name];
 
   if (!service) program.help();
-  else service.serve();
+  else yield service.serve();
 })();
