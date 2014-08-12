@@ -1,0 +1,52 @@
+# =============================== Job Queue ===================================
+[beanstalkd]
+host = "0.0.0.0"
+port = 11300
+tube = "bell"
+
+# ================================ Storage ====================================
+[ssdb]
+host = "0.0.0.0"
+port = 8888
+
+[ssdb.allSeries]
+hashmap = "bell.allseries"  # the hashmap to store all series names and status
+
+[ssdb.series.zsets]  # zsets to store datapoints
+maxSize = 60480  # 7 * 6 * 60 * 24 = 7 days
+namePrefix = "bell."
+
+# ================================ Listener ===================================
+[listener]
+host = "0.0.0.0"
+port = 2024
+
+[listener.patterns]
+# must pass at least one of the matches patterns and dont match any ignores
+matches = ["*"]
+ignores = ["statsd.*"]
+
+# ================================ Analyzer ===================================
+[analyzer]
+strict = true  #  if strict mode
+periodicity = 86400  # for all series, 86400 = 24 * 60 * 60 = 1 day
+filterOffset = 0.01  # filter all points within `periodicity * offset`
+minSeriesSize = 86  # analyze only if series's size is big than this value \
+                    # 86.4 = 24 * 6 * 60 * 0.01 = 1day * filterOffset
+
+# ================================ WebApp =====================================
+[webapp]
+host = "0.0.0.0"
+port = 8989
+debug = true
+rootPath = ""   # set this if your webapp serves in a sub-directory.
+
+# ================================ Hooks =======================================
+[hooks]
+enable = false
+modules = ["bell_hipchat"]
+
+[hooks.hipchat]
+roomId = 12345
+token = "your-hipchat-api-token"
+weburl = "http://bell.example.com"
