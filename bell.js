@@ -1,64 +1,55 @@
-// Copyright (c) 2014 Eleme, Inc. https://github.com/eleme/node-bell
-//
-// Usage: bell <service> [options]
-//
-// Options:
-//
-//   -h, --help            output usage information
-//   -V, --version         output the version number
-//   -c, --configs <c>     configs file path
-//   -l, --log-level <l>   logging level (1~5 for debug~critical)
-//   -s, --sample-configs  generate sample configs
+/* Node.js version for eleme/bell, https://github.com/eleme/node-bell
+ * Copyright (c) 2014 Eleme, Inc.
+ *
+ * Usage: bell <service> [options]
+ *
+ * Options:
+ *
+ *   -h, --help            output usage information
+ *   -V, --version         output the version number
+ *   -c, --configs <c>     configs file path
+ *   -l, --log-level <l>   logging level (1~5 for debug~critical)
+ *   -s, --sample-configs  generate sample configs
+ */
+
 
 var co = require('co')
-  , path = require('path')
+  , fs = require('fs')
   , program = require('commander')
   , toml = require('toml')
+  , analyzer = require('./lib/analyzer')
   , configs = require('./lib/configs')
   , listener = require('./lib/listener')
-  , analyzer = require('./lib/analyzer')
-  , util = require('./lib/util');
-
-var log = util.log;
-
-
-function parseLogLevel(val) {
-  return (parseInt(val) - 1) % 5  + 1;  // limit to 1~5
-}
-
+  , util = require('./lib/util')
+  , log = util.log
+;
 
 co(function *(){
   program
-    .version('0.0.1')
-    .usage('<service> [options]')
-    .option('-c, --configs-path <c>', 'configs file path')
-    .option('-l, --log-level <l>', 'logging level (1~5 for critical~debug)', parseLogLevel)
-    .option('-s, --sample-configs', 'generate sample configs file')
-    .parse(process.argv);
+  .version('0.0.1')
+  .usage('<service> [options]')
+  .option('-c, --configs-path <c>', 'configs file path')
+  .option('-s, --sample-configs', 'generate sample configs file')
+  .option('-l, --log-level <l>', 'logging level (1~5 for critical~debug)', function(val){
+    return (parseInt(val, 10) - 1) % 5 + 1;
+  })
+  .parse(process.argv);
 
-  // set log level
   log.level = util.logLevels[program.logLevel || 4];
 
-  // generate sample configs file
   if (program.sampleConfigs) {
-    util.copy(util.path.configs, 'sample.configs.toml');
-    log.info('Generate sample.configs.toml done.')
-    return
+    log.info('Generate sample.configs.toml to current directory');
+    return util.copy(util.path.configs, 'sample.configs.toml');
   }
 
-  // update configs
   var configsPath = program.configsPath || util.path.configs;
-  var content = yield util.readFile(configsPath)
-  util.updateNestedObjects(configs, toml.parse(content.toString()));
+  var content = fs.readFileSync(configsPath).toString();
+  util.updateNestedObjects(configs, toml.parse(content));
 
-  // reterve service name
   var name = program.args[0];
   if (!name) program.help();
 
-  var service = {
-    listener: listener, analyzer: analyzer
-  }[name];
-
+  var service = {listener: listener, analyzer: analyzer}[name];
   if (!service) program.help();
   else yield service.serve();
 })();
