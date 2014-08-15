@@ -1,5 +1,5 @@
-/* Node.js version for eleme/bell, https://github.com/eleme/node-bell
- * Copyright (c) 2014 Eleme, Inc.
+/* Realtime anomalies detection based on statsd, for periodic time series.
+ * Copyright (c) 2014 Eleme, Inc. https://github.com/eleme/not-bell
  *
  * Usage: bell <service> [options]
  *
