@@ -20,6 +20,7 @@ var co = require('co')
   , analyzer = require('./lib/analyzer')
   , configs = require('./lib/configs')
   , listener = require('./lib/listener')
+  , webapp = require('./lib/webapp')
   , util = require('./lib/util')
   , log = util.log
 ;
@@ -49,7 +50,7 @@ co(function *(){
   var name = program.args[0];
   if (!name) program.help();
 
-  var service = {listener: listener, analyzer: analyzer}[name];
+  var service = {listener: listener, analyzer: analyzer, webapp: webapp}[name];
   if (!service) program.help();
   else yield service.serve();
 })();

@@ -7,6 +7,10 @@
     "commander": "2.3.0",
     "fivebeans": "~1.1.1",
     "log": "1.4.0",
+    "koa": "~0.10.0",
+    "koa-logger": "~1.2.2",
+    "koa-route": "2.0.0",
+    "swig": "1.4.2",
     "minimatch": "~1.0.0",
     "ssdb": ">=0.0.8",
     "toml": "2.0.6"
