@@ -30,14 +30,12 @@ ignores = ["statsd.*"]
 strict = true  #  if strict mode
 periodicity = 86400  # for all series, 86400 = 24 * 60 * 60 = 1 day
 filterOffset = 0.01  # filter all points within `periodicity * offset`
-minSeriesSize = 86  # analyze only if series's size is big than this value \
+minSeriesSize = 50  # analyze only if series's size is big than this value \
                     # 86.4 = 24 * 6 * 60 * 0.01 = 1day * filterOffset
 
 # ================================ WebApp =====================================
 [webapp]
-host = "0.0.0.0"
 port = 8989
-debug = true
 rootPath = ""   # set this if your webapp serves in a sub-directory.
 
 # ================================ Hooks =======================================
