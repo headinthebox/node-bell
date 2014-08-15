@@ -13,7 +13,7 @@ port = 8888
 hashmap = "bell.allseries"  # the hashmap to store all series names and status
 
 [ssdb.series.zsets]  # zsets to store datapoints
-maxSize = 60480  # 7 * 6 * 60 * 24 = 7 days
+maxSize = 43200  # 5 * 6 * 60 * 24 = 5 days
 namePrefix = "bell."
 
 # ================================ Listener ===================================
@@ -36,7 +36,7 @@ minSeriesSize = 50  # analyze only if series's size is big than this value \
 # ================================ WebApp =====================================
 [webapp]
 port = 8989
-root = "bell"   # set this if your webapp serves in a sub-directory.
+root = ""   # set this if your webapp serves in a sub-directory.
 
 # ================================ Hooks =======================================
 [hooks]
