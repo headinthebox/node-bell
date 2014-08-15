@@ -36,7 +36,7 @@ minSeriesSize = 50  # analyze only if series's size is big than this value \
 # ================================ WebApp =====================================
 [webapp]
 port = 8989
-root = ""   # set this if your webapp serves in a sub-directory.
+root = "bell"   # set this if your webapp serves in a sub-directory.
 
 # ================================ Hooks =======================================
 [hooks]
