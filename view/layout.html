@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>{%block title%}Bell - Realtime anomalous metrics detection.{%endblock%}</title>
+    <link id="favicon" rel="shortcut icon" href="{{ url('static', 'icons/bell.png') }}">
+    <link rel="stylesheet" href="{{url('static', 'css/bootstrap.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{url('static', 'css/layout.css')}}" type="text/css" />
+    <script type="text/javascript" src="{{url('static', 'js/jquery.1.10.2.min.js')}}"></script>
+    {%block extra_header%}{%endblock%}
+  </head>
+  <body>
+    <div class="container">
+
+      <!--Nav Bar-->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <a class="navbar-brand project-name" href="{{url('/')}}"> Bell </a>
+        </div>
+      </div>
+      <!-- End Nav Bar -->
+
+      <!-- Input Form -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Filter</h3>
+        </div>
+        <div class="panel-body">
+          <form action="" id="search-form" method="get" accept-charset="utf-8" onsubmit="submitform();return false;">
+            <div class="input-group input-group-lg input">
+              <input name='typeaheadInput' type="text" id="typeahead" class="form-control" placeholder="Pattern" data-provide="typeahead" autocomplete="off" autofocus="autofocus">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" >Go !</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Input Form -->
+
+      <!-- Main Board -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{%block board_title%}Status{%block board_title%}</h3>
+        </div>
+        <div class="panel-body">
+        {%block container%}{%endblock%}
+        </div>
+      </div>
+      <!-- End Main Board -->
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="muted credit"> Bell - ELEME.Inc &copy; 2014 |
+        <a href="https://github.com/Eleme/bell.git">Eleme/bell.git</a> </p>
+      </div>
+      <!-- End Footer -->
+
+    </div>
+  </body>
+  {%block before_end%}
+  {%endblock%}
+</html>
