@@ -14,18 +14,25 @@ var init = function(names, apiPrefix) {
       var api = apiPrefix + '/' + [name, start, stop].join('/');
       var values = [], i = 0;
 
-      $.getJSON(api, function(data){
+      var xmlhttp=new XMLHttpRequest();
+      xmlhttp.open("GET", api, true);
+      xmlhttp.send();
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          var data = JSON.parse(xmlhttp.responseText);
 
-        while (start < stop) {
-          while (start < data.times[i]) {
+          while (start < stop) {
+            while (start < data.times[i]) {
+              start += step;
+              values.push(0);
+            }
+            values.push(data.vals[i++]);
             start += step;
-            values.push(0);
           }
-          values.push(data.vals[i++]);
-          start += step;
+
+          callback(null, values);
         }
-        callback(null, values);
-      });
+      }
     }, name);
   }
 

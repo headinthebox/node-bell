@@ -1,15 +1,23 @@
 body {
-  font: 12px/1.4 Consolas, Helvetica, sans-serif;
+  font: 15px/1.5 Helvetica, sans-serif;
   color: #333;
 }
 
-.container {
-  text-align: center;
-  width: 1200px;
+.header, .container {
   margin: 0 auto;
-  margin-top: 4em;
+  width: 1137px;
+}
+
+.container {
+  margin-top: .6em;
+  text-align: center;
   border: 1px solid #ddd;
   border-radius: 5px
+}
+
+.header img{
+  margin-top: 1em;
+  height: 2.5em;
 }
 
 form {
@@ -18,7 +26,8 @@ form {
 }
 
 form input {
-  width: 90%;
+  font-size: 18px;
+  width: 95%;
   padding: 5px 3px;
   border: 0;
   border-bottom: 1px solid #999;
@@ -27,18 +36,31 @@ form input {
 }
 
 .main {
-  width: 90%;
+  width: 95%;
   margin: 1em auto;
   position: relative;
 }
 
 .main .description {
   font-size: 15px;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 
 .footer {
   padding: 10px 0;
   color: #777;
+}
+
+.footer a {
+  color: #777;
+  text-decoration: underline
+}
+
+.footer a :hover {
+  color: #777
+}
+
+.footer a :visited {
+  color: #777
 }
