@@ -1,10 +1,12 @@
-var init = function(data, apiPrefix) {
+var init = function(names, apiPrefix) {
+  // cubism context
   var context = cubism.context()
   .serverDelay(0)
   .clientDelay(0)
   .step(1e4)
   .size(1080);  // 360 * 3 = 3 hours
 
+  // metric source
   function pull(name) {
     return context.metric(function(start, stop, step, callback){
       start = +start/1000, stop = +stop/1000, step = +step/1000;
@@ -27,12 +29,11 @@ var init = function(data, apiPrefix) {
     }, name);
   }
 
+  // create series
   var d = [];
+  for (var i = 0; i < names.length; i++) {d.push(pull(names[i]))};
 
-  for (var name in data) {
-    d.push(pull(name));
-  }
-
+  // plot chart
   d3.select("#chart").call(function(div) {
 
     div.append("div")
