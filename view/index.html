@@ -6,7 +6,6 @@
     <link rel="shortcut icon" href="{{ url('static', 'icons/bell.png') }}">
     <link rel="stylesheet" href="{{url('static', 'css/style.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{url('static', 'css/cubism.css')}}" type="text/css" />
-    <script src="{{url('static', 'js/jquery.1.10.2.min.js')}}"></script>
     <script src="{{url('static', 'js/d3.v2.js')}}"></script>
     <script src="{{url('static', 'js/cubism.v1.js')}}"></script>
   </head>
@@ -19,15 +18,16 @@
         }
         </script>
         <form id="form" action="" method="get" accept-charset="utf-8" onsubmit="submitform();return false;">
-        <input name='pattern' type="text" placeholder="Pattern"  autofocus="autofocus">
+        <input name='pattern' type="text" placeholder="Pattern[/Limit]"  autofocus="autofocus">
         </form>
       </div>
       <div class="main">
-        <div class="description"> (filter: {{pattern}}, limit: 50, recent: 3h) </div>
+        <div class="description"> filter: {{pattern}}, limit: {{limit}}, recent: 3h </div>
         <div id="chart"></div>
       </div>
       <div class="footer">
-        Copyright (c) 2014 <a href="https://github.com/eleme">Eleme, Inc</a>
+        Copyright (c) 2014 <a href="https://github.com/eleme">Eleme, Inc</a> | 
+        <a href="https://github.com/eleme/bell">Bell</a>
       </div>
     </div>
   </body>
