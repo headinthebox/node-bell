@@ -41,7 +41,7 @@ root = ""   # set this if your webapp serves in a sub-directory.
 # ================================ Hooks =======================================
 [hooks]
 enable = false
-modules = ["bell_hipchat"]
+modules = ["../hooks/hipchat"]
 
 [hooks.hipchat]
 roomId = 12345
