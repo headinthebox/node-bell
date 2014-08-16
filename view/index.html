@@ -1,1 +1,42 @@
-{%extends 'layout.html'%}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Bell - Realtime anomalous metrics detection system</title>
+    <link rel="shortcut icon" href="{{ url('static', 'icons/bell.png') }}">
+    <link rel="stylesheet" href="{{url('static', 'css/style.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{url('static', 'css/cubism.css')}}" type="text/css" />
+    <script src="{{url('static', 'js/jquery.1.10.2.min.js')}}"></script>
+    <script src="{{url('static', 'js/d3.v2.js')}}"></script>
+    <script src="{{url('static', 'js/cubism.v1.js')}}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-form">
+        <script>
+        function submitform() {
+          window.location.href = "{{url('/')}}" + document.getElementById('form').pattern.value;
+        }
+        </script>
+        <form id="form" action="" method="get" accept-charset="utf-8" onsubmit="submitform();return false;">
+        <input name='pattern' type="text" placeholder="Pattern"  autofocus="autofocus">
+        </form>
+      </div>
+      <div class="main">
+        <div class="description"> (filter: {{pattern}}, limit: 50, recent: 3h) </div>
+        <div id="chart"></div>
+      </div>
+      <div class="footer">
+        Copyright (c) 2014 <a href="https://github.com/eleme">Eleme, Inc</a>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="{{url('static', 'js/script.js')}}"></script>
+{%autoescape false%}
+<script>
+window.onload = function() {
+  init({{data}}, '{{apiPrefix}}');
+}
+</script>
+{%endautoescape%}

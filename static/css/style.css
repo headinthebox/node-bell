@@ -1,0 +1,44 @@
+body {
+  font: 12px/1.4 Consolas, Helvetica, sans-serif;
+  color: #333;
+}
+
+.container {
+  text-align: center;
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 4em;
+  border: 1px solid #ddd;
+  border-radius: 5px
+}
+
+form {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+form input {
+  width: 90%;
+  padding: 5px 3px;
+  border: 0;
+  border-bottom: 1px solid #999;
+  outline: 0;
+  background: transparent;
+}
+
+.main {
+  width: 90%;
+  margin: 1em auto;
+  position: relative;
+}
+
+.main .description {
+  font-size: 15px;
+  padding: 10px 0;
+}
+
+
+.footer {
+  padding: 10px 0;
+  color: #777;
+}

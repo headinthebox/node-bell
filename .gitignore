@@ -3,3 +3,4 @@ node_modules
 test*.toml
 sample.configs.toml
 test-*.js
+test-2
