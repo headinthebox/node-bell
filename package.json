@@ -1,6 +1,17 @@
 {
   "name": "bell",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eleme/node-bell.git"
+  },
+  "description": "Realtime anomalous metrics detection",
+  "author": "hit9 <wangchao@ele.me>",
+  "keywords": ["anomaly", "outlier", "metric", "realtime", "statsd"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.11"
+  },
   "dependencies": {
     "bufferpack": "~0.0.6",
     "co": "~3.1.0",
