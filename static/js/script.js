@@ -51,7 +51,12 @@ var init = function(names, apiPrefix) {
     .data(d)
     .enter().append("div")
     .attr("class", "horizon")
-    .call(context.horizon().extent([0, 1]));
+    .call(
+      context.horizon()
+      .extent([0, 2])
+      .colors(["black", "black", "black", "black",
+              "lightgray", "gray", "#ffb6ad", "#ea3c0b"])
+     );
 
     div.append("div")
     .attr("class", "rule")

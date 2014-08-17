@@ -55,8 +55,20 @@ exports.init = function(configs, analyzer, log) {
     var message = util.format(
       pattern,
       name, web, name, datetime, value, multi);
+    var color = "yellow";
+    var notify = 0;
+
+    if (multi >= 2.0) {
+      color = "red";
+      notify = 1;
+    }
+
     request.post(api).form({
-      room_id: roomId, from: 'Bell', message: message
+      room_id: roomId,
+      from: 'Bell',
+      message: message,
+      color: color,
+      notify: notify
     });
   });
 };
