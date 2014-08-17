@@ -10,6 +10,25 @@
  *   -c, --configs <c>     configs file path
  *   -l, --log-level <l>   logging level (1~5 for debug~critical)
  *   -s, --sample-configs  generate sample configs
+ *
+ * Data flow:
+ *
+ *  [statsd]
+ *     |
+ *     v        send to queue
+ * [listener] -----------------> [beanstalkd]
+ *                                   |
+ *                                   | reserve
+ *             history metrics       v       record anomalies
+ *             ---------------> [analyzers] ----------------
+ *             |                     |                     |
+ *             |                     | put to ssdb         |
+ *             |                     v                     |
+ *             ------------------- [ssdb] <-----------------
+ *                                   |
+ *                                   |
+ *                                   v
+ *                                [webapp]
  */
 
 
