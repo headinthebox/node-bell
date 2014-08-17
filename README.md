@@ -7,7 +7,7 @@ for periodic time series.
 ![](snap.png)
 
 
-Latest version: v0.0.1
+Latest version: v0.0.2
 
 Requirements
 ------------
