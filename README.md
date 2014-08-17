@@ -91,7 +91,7 @@ Look Inside
 
 ### Algorithm
 
-**3-sigma** or called **68-95-99.7** rule, ref: http://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule
+**3-sigma** or called **68-95-99.7** rule, [reference](http://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule)
 
 ![](http://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/350px-Standard_deviation_diagram.svg.png)
 
