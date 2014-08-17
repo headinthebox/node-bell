@@ -54,6 +54,5 @@
 
 .line {
   background: black;
-  opacity: .5;
   z-index: 2;
 }

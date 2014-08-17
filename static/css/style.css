@@ -15,9 +15,24 @@ body {
   border-radius: 5px
 }
 
-.header img{
+.header img {
   margin-top: 1em;
   height: 2.5em;
+}
+
+.header a.slogan {
+  color: #777;
+  font-style: italic;
+  font-weight: 600;
+  width: 40%;
+  text-align: right;
+  display: inline-block;
+}
+
+.header a.logo {
+  text-decoration: none;
+  width: 56%;
+  display: inline-block;
 }
 
 form {
@@ -42,8 +57,8 @@ form input {
 }
 
 .main .description {
-  font-size: 15px;
-  padding: 15px 0;
+  font-size: 17px;
+  padding: 20px 0;
 }
 
 

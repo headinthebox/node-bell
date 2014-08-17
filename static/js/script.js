@@ -1,19 +1,25 @@
-var init = function(names, apiPrefix) {
-  // cubism context
+function init(pattern, limit, apiPrefix) {
+  /*
+   *
+   */
   var context = cubism.context()
   .serverDelay(0)
   .clientDelay(0)
-  .step(1e4)
-  .size(1080);  // 360 * 3 = 3 hours
+  .step(1e4)  // 10sec
+  .size(1080)  // 3h
+  ;
 
-  // metric source
-  function pull(name) {
+  /*
+   * metrics source
+   */
+  function pullMetrics(name) {
     return context.metric(function(start, stop, step, callback){
+      // cast to timestamp
       start = +start/1000, stop = +stop/1000, step = +step/1000;
-
-      var api = apiPrefix + '/' + [name, start, stop].join('/');
+      // api url to fetch metrics
+      var api = apiPrefix + '/' + ['metrics', name, start, stop].join('/');
       var values = [], i = 0;
-
+      // send request
       var xmlhttp=new XMLHttpRequest();
       xmlhttp.open("GET", api, true);
       xmlhttp.send();
@@ -29,37 +35,63 @@ var init = function(names, apiPrefix) {
             values.push(data.vals[i++]);
             start += step;
           }
-
           callback(null, values);
         }
-      }
+      };
     }, name);
   }
 
-  // create series
-  var d = [];
-  for (var i = 0; i < names.length; i++) {d.push(pull(names[i]))};
+  /*
+   * names source
+   */
+  function pullNames(callback) {
+    var api = apiPrefix + '/' + ['names', pattern, limit].join('/');
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.open("GET", api, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var names = JSON.parse(xmlhttp.responseText);
+        callback(names);
+      }
+    };
+  }
 
-  // plot chart
-  d3.select("#chart").call(function(div) {
+  /*
+   * plot graph
+   */
 
-    div.append("div")
-    .attr("class", "axis")
-    .call(context.axis().orient("top"));
+  function plot() {
+    pullNames(function(names){
+      var d = [];
+      for (var i = 0; i < names.length; i++) {d.push(pullMetrics(names[i]))};
 
-    div.selectAll(".horizon")
-    .data(d)
-    .enter().append("div")
-    .attr("class", "horizon")
-    .call(
-      context.horizon()
-      .extent([0, 2])
-      .colors(["black", "black", "black", "black",
-              "lightgray", "gray", "#ffb6ad", "#ea3c0b"])
-     );
+      d3.select("#chart").call(function(div) {
 
-    div.append("div")
-    .attr("class", "rule")
-    .call(context.rule());
-  });
+        div.append("div")
+        .attr("class", "axis")
+        .call(context.axis().orient("top"));
+
+        div.selectAll(".horizon")
+        .data(d)
+        .enter().append("div")
+        .attr("class", "horizon")
+        .call(
+          context.horizon()
+          .extent([0, 1.0])
+        );
+
+        div.append("div")
+        .attr("class", "rule")
+        .call(context.rule());
+      });
+    });
+  }
+
+  plot();
+
+  setInterval(function(){
+    d3.select("#chart").selectAll("*").remove();
+    plot();
+  }, 5 * 60 * 1000);  // replot every 5 min
 }

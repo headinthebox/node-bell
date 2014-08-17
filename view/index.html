@@ -11,8 +11,11 @@
   </head>
   <body>
     <div class="header">
-      <a href="{{url('/')}}">
+      <a href="{{url('/')}}" class="logo">
         <img src="{{url('static', 'img/logo.png')}}"/>
+      </a>
+      <a class="slogan"> 
+        the more <span style="color: green">green</span>, the more <span style="color: red">abnormal</span>.
       </a>
     </div>
     <div class="container">
@@ -31,7 +34,7 @@
         <div id="chart"></div>
       </div>
       <div class="footer">
-        Copyright (c) 2014 <a href="https://github.com/eleme">Eleme, Inc</a> | 
+        Copyright (c) 2014 <a href="https://github.com/eleme">Eleme, Inc</a> |
         <a href="https://github.com/eleme/node-bell">Bell</a>
       </div>
     </div>
@@ -41,7 +44,7 @@
 {%autoescape false%}
 <script>
 window.onload = function() {
-  init({{names}}, '{{apiPrefix}}');
+  init('{{pattern}}', {{limit}}, '{{apiPrefix}}');
 }
 </script>
 {%endautoescape%}
