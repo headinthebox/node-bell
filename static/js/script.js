@@ -1,6 +1,6 @@
 function init(pattern, limit, apiPrefix) {
   /*
-   *
+   * cubism context
    */
   var context = cubism.context()
   .serverDelay(0)
@@ -78,7 +78,8 @@ function init(pattern, limit, apiPrefix) {
         .attr("class", "horizon")
         .call(
           context.horizon()
-          .extent([0, 1.0])
+          .extent([0, 1])
+          // .colors(["black", "black", "gray", "#c03"])
         );
 
         div.append("div")
