@@ -4,7 +4,7 @@ Bell
 Realtime anomalies detection based on statsd,
 for periodic time series.
 
-![](snap.png)
+![](https://github.com/eleme/node-bell/raw/master/snap.png)
 
 
 Latest version: v0.0.2
