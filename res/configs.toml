@@ -46,3 +46,7 @@ modules = ["../hooks/hipchat"]
 roomId = 12345
 token = "your-hipchat-api-token"
 weburl = "http://bell.example.com"
+
+# notify only if at least <minCount> anomalies were found in last <recent> time
+recent = 300  # 5min
+minCount = 10

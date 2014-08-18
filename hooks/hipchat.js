@@ -1,5 +1,5 @@
-/* This module can send message to a hipchat room once an anomalous datapoint
- * was detected. To enable it, set `hooks.enable` to `true`, and add
+/* This module can send message to a hipchat room once enough anomalies
+ * were detected. To enable it, set `hooks.enable` to `true`, and add
  * `../hooks/hipchat` to `hooks.modules`
  * ::
  *   [hooks]
@@ -19,56 +19,65 @@ var util = require('util')
 ;
 
 /*
- * message template:
- *   %1: metric name
- *   %2: web url
- *   %3: metric name
- *   %4: datetime
- *   %5: value
- *   %6: multi
+ * %0: weburl
+ * %1: series
+ * %2: series
+ * %3: count
+ * %4: seconds
  */
-var pattern = ('Anomaly detected: %s, time: <a href="%s/%s/1">' +
-              '%s</a>, value: %s, abnormal factor: %s')
 
+var pattern = (
+  '<a href="%s/%s/1"><strong>%s</strong><a/>: ' +
+  '<strong>%d</strong> anomalies detected in last %d seconds.'
+)
 
-/*
- * util to convert timestamp to readable date string
- */
-function timestamp2str(timestamp) {
-  var date = new Date(timestamp * 1000);
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();
-  return hours + ':' + minutes + ':' + seconds;
-}
 
 exports.init = function(configs, analyzer, log) {
-  var api = 'http://api.hipchat.com/v1/rooms/message?' +
-    'format=json&auth_token=' + configs.hooks.hipchat.token;
-  var web = configs.hooks.hipchat.weburl;
+  var api = (
+    'http://api.hipchat.com/v1/rooms/message?' +
+    'format=json&auth_token=' + configs.hooks.hipchat.token
+  );
+  var weburl = configs.hooks.hipchat.weburl;
   var roomId = configs.hooks.hipchat.roomId;
+  var recent = configs.hooks.hipchat.recent;
+  var minCount = configs.hooks.hipchat.minCount;
+
+  var dict = {};  // anomalies cache
 
   analyzer.on('anomaly detected', function(metric, multi){
-    var name = metric[0];
-    var datetime = timestamp2str(metric[1][0]);
-    var value = metric[1][1];
-    var message = util.format(
-      pattern,
-      name, web, name, datetime, value, multi);
-    var color = "yellow";
-    var notify = 0;
+    var key = metric[0];
+    var time = metric[1][0]
+    var now = (new Date).getTime() / 1000;
 
-    if (multi >= 2.0) {
-      color = "red";
-      notify = 1;
+    if (dict[key] == undefined) dict[key] = [];
+
+    var cache = dict[key];
+
+    // pop outdate anomalies
+    for (var i = 0; i < cache.length; i++) {
+      if (now - cache[i] > recent)
+        cache.splice(i, 1);
     }
 
-    request.post(api).form({
-      room_id: roomId,
-      from: 'Bell',
-      message: message,
-      color: color,
-      notify: notify
-    });
+     cache.push(time);
+
+     if (cache.length >= minCount) {
+       log.debug('Notify hipchat (%s, %d)..', key, cache.count);
+
+       var message = util.format(
+         pattern, weburl, key, key, cache.length, recent);
+
+       request.post(api).form({
+         room_id: roomId,
+         from: 'Bell',
+         message: message,
+         notify: 1
+       }).on('error', function(err){
+         log.error('Hipchat hook request error: %s', err)
+       });
+
+       // clean cache
+       while (cache.length > 0) {cache.pop()}
+     }
   });
-};
+}
