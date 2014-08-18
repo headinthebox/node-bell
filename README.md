@@ -49,7 +49,7 @@ Quick Start
    ```bash
    $ bell -s
    $ mv sample.configs.toml configs.toml
-   $ vi sample.configs.toml
+   $ vi configs.toml
    ```
 3. Start listener & analyzers (optional: webapp).
 
