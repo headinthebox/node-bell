@@ -1,3 +1,4 @@
-#!/usr/bin/env node --harmony-generators
+#!/bin/sh
+':' //; exec "$(command -v node)" "--harmony-generators" "$0" "$@"
 
 require('../bell.js');

@@ -1,6 +1,6 @@
 {
   "name": "node-bell",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git://github.com/eleme/node-bell.git"
@@ -10,7 +10,7 @@
   "keywords": ["anomaly", "outlier", "metric", "realtime", "statsd"],
   "license": "MIT",
   "engines": {
-    "node": ">=0.11"
+    "node": ">=0.11.9"
   },
   "dependencies": {
     "co": "~3.1.0",
