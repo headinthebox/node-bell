@@ -7,7 +7,7 @@ for periodic time series.
 ![](https://github.com/eleme/node-bell/raw/master/snap.png)
 
 
-Latest version: v0.0.5
+Latest version: v0.0.6
 
 Requirements
 ------------
