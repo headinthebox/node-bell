@@ -79,8 +79,7 @@ function init(pattern, limit, apiPrefix) {
         .call(
           context.horizon()
           .extent([0, 2])
-          .colors(["black", "black", "black", "black", "black", "black", "black", "black",
-          "#eee", "#ccc", "#aaa", "#888", "#666", "#444", "#222", "#000"])
+          .colors(['black', 'black', 'teal', '#dd1144'])
         );
 
         div.append("div")
