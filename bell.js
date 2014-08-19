@@ -46,7 +46,7 @@ var co = require('co')
 
 co(function *(){
   program
-  .version('0.0.6')
+  .version('0.0.7')
   .usage('<service> [options]')
   .option('-c, --configs-path <c>', 'configs file path')
   .option('-s, --sample-configs', 'generate sample configs file')
