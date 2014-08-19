@@ -62,7 +62,7 @@ exports.init = function(configs, analyzer, log) {
      cache.push(time);
 
      if (cache.length >= minCount) {
-       log.debug('Notify hipchat (%s, %d)..', key, cache.count);
+       log.debug('Notify hipchat (%s, %d)..', key, cache.length);
 
        var message = util.format(
          pattern, weburl, key, key, cache.length, recent);
