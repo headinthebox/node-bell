@@ -31,6 +31,7 @@ strict = true  #  if strict mode
 periodicity = 86400  # for all series, 86400 = 24 * 60 * 60 = 1 day
 filterOffset = 0.01  # filter all points within `periodicity * offset`
 minSeriesSize = 50  # analyze only if series's size is big than this value
+severityTimeRecent = 3600  # calculate anomalous serverity in recent certain time
 
 # ================================ WebApp =====================================
 [webapp]
