@@ -6,7 +6,6 @@ for periodic time series.
 
 ![](https://github.com/eleme/node-bell/raw/master/snap.png)
 
-
 Latest version: v0.1.0
 
 Requirements
@@ -20,24 +19,16 @@ Requirements
 Installation
 ------------
 
-Install statsd backend [statsd-bell](https://github.com/eleme/statsd-bell):
-
 ```bash
-$ npm install statsd-bell
+npm install node-bell -g
 ```
 
-then add `statsd-bell` to statsd's backends in statsd's config.js:
+then add `node-bell` to statsd's backends in statsd's config.js:
 
 ```js
 {
-, backends: ["statsd-bell"]
+, backends: ["node-bell"]
 }
-```
-
-next, install `node-bell`:
-
-```bash
-$ npm install node-bell -g
 ```
 
 Quick Start
