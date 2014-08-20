@@ -8,7 +8,6 @@
   "description": "Realtime anomalous metrics detection",
   "author": "hit9 <wangchao@ele.me>",
   "keywords": ["anomaly", "outlier", "metric", "realtime", "statsd"],
-  "license": "MIT",
   "engines": {
     "node": ">=0.11.9"
   },
@@ -32,5 +31,6 @@
   },
   "bin": {
     "bell": "./bin/cli.js"
-  }
+  },
+  "license": "MIT"
 }
