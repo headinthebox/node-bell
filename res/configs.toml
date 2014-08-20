@@ -37,7 +37,6 @@ severityTimeRecent = 3600  # calculate anomalous serverity in recent certain tim
 [webapp]
 port = 8989
 root = ""   # set this if your webapp serves in a sub-directory.
-workers = 0  # set to 0 to use cpu numbers
 
 # ================================ Hooks =======================================
 [hooks]
