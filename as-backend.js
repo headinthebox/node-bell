@@ -9,7 +9,7 @@
  *   bellTimerDataFields, array, default: ['mean', 'count_ps']
  *
  *
- * Metric types supported: `counter` & `timer`.
+ * Metric types supported: `counter` & `timer` (counter_rates & timer_data)
  */
 
 
@@ -24,7 +24,7 @@ var config;
 
 // metrics makers
 var makers = {
-  counter_rate: function (key, val, time) {
+  counter_rates: function (key, val, time) {
     return [['counter.' + key, [time, val]]];
   },
   timer_data: function (key, stats, time) {
