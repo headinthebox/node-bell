@@ -118,7 +118,12 @@ timestamp | value:is_anomaly:timestamp
                                [webapp]
 ```
 
+FAQ
+---
+
+[FAQ.md](FAQ.md)
+
 License
 --------
 
-MIT.
+MIT.  Copyright (c) 2014 Eleme, Inc.
