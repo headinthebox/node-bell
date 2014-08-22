@@ -14,9 +14,8 @@
  *   weburl = "http://bell.example.com"
  */
 
-var util = require('util')
-  , request = require('request')
-;
+var util = require('util');
+var request = require('request');
 
 /*
  * %0: weburl
@@ -29,7 +28,7 @@ var util = require('util')
 var pattern = (
   '<a href="%s/%s/1"><strong>%s</strong><a/>: ' +
   '<strong>%d</strong> anomalies detected in last %d seconds.'
-)
+);
 
 
 exports.init = function(configs, analyzer, log) {
@@ -46,10 +45,10 @@ exports.init = function(configs, analyzer, log) {
 
   analyzer.on('anomaly detected', function(metric, multi){
     var key = metric[0];
-    var time = metric[1][0]
-    var now = (new Date).getTime() / 1000;
+    var time = metric[1][0];
+    var now = (new Date()).getTime() / 1000;
 
-    if (dict[key] == undefined) dict[key] = [];
+    if (dict[key] === undefined) dict[key] = [];
 
     var cache = dict[key];
 
@@ -73,11 +72,11 @@ exports.init = function(configs, analyzer, log) {
          message: message,
          notify: 1
        }).on('error', function(err){
-         log.error('Hipchat hook request error: %s', err)
+         log.error('Hipchat hook request error: %s', err);
        });
 
        // clean cache
-       while (cache.length > 0) {cache.pop()}
+       while (cache.length > 0) {cache.pop();}
      }
   });
-}
+};
