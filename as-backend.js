@@ -13,9 +13,8 @@
  */
 
 
-var net = require('net')
-  , minimatch = require('minimatch')
-;
+var net = require('net');
+var minimatch = require('minimatch');
 
 var debug;
 var logger;
@@ -38,7 +37,7 @@ var makers = {
     }
     return metrics;
   }
-}
+};
 
 
 function match (key) {
@@ -98,14 +97,14 @@ Bell.prototype.flush = function(time, data) {
       }
     });
   }
-}
+};
 
 
 exports.init = function(uptime, _config, events, _logger) {
   logger = _logger || console;
   debug = _config.debug;
   config = _config || {};
-  var bell = new Bell;
-  events.on('flush', function(time, data){bell.flush(time, data)});
+  var bell = new Bell();
+  events.on('flush', function(time, data){bell.flush(time, data);});
   return true;
-}
+};
