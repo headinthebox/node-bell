@@ -1,6 +1,6 @@
 /* This module can send message to a hipchat room once enough anomalies
  * were detected. To enable it, set `hooks.enable` to `true`, and add
- * `../hooks/hipchat` to `hooks.modules`
+ * `../hook/hipchat` to `hooks.modules`
  * ::
  *   [hooks]
  *   enable = true

@@ -75,7 +75,7 @@ Events currently available:
 
    Emitted when an anomaly was detected.
 
-Built-in hook module (and sample hook): [hooks](hooks).
+Built-in hook module (and sample hook): [hook](hook).
 
 Look Inside
 -----------
